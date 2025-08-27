@@ -1,0 +1,12 @@
+export function capitalizeFirst(s: string) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+export function validateName(name:string) {
+    return name.length > 6 && name.includes(' ');
+}
+
+export function validateEmail(email: string) {
+    const expression: RegExp = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return  expression.test(email); // true
+}
