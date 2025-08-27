@@ -7,7 +7,7 @@ class UserService {
     async fetchUsers() {
         await timeout(2000)
         const users = [];
-        const len = 50;
+        const len = 5000;
         for (var i = 0; i < len; i++) {
             const id = i;
             const name = faker.person.fullName();
