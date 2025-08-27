@@ -97,16 +97,16 @@ export default function UsersPage() {
 
                 <button
                     onClick={() => navigate("/users/filter-users")}
-                    className="fixed bottom-6 right-48 w-14 h-14 rounded-full bg-blue-600 text-white text-2xl shadow-lg flex items-center justify-center hover:bg-blue-700"
+                    className="fixed bottom-24 right-6 w-50 h-12 ps-3 rounded-full bg-blue-600 text-white text-2xl shadow-lg flex items-center justify-start hover:bg-blue-700"
                 >
-                    %
+                    % Filter
                 </button>
 
                 <button
                     onClick={() => navigate("/users/add-user")}
-                    className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-blue-600 text-white text-2xl shadow-lg flex items-center justify-center hover:bg-blue-700"
+                    className="fixed bottom-6 right-6 w-50 h-12 ps-3 rounded-full bg-blue-600 text-white text-2xl shadow-lg flex items-center justify-start hover:bg-blue-700"
                 >
-                    +
+                    + Add User
                 </button>
 
 
@@ -232,16 +232,16 @@ export default function UsersPage() {
 
                 <button
                     onClick={() => navigate("/users/filter-users")}
-                    className="fixed bottom-6 right-48 w-14 h-14 rounded-full bg-blue-600 text-white text-2xl shadow-lg flex items-center justify-center hover:bg-blue-700"
+                    className="fixed bottom-24 right-6 w-50 h-12 ps-3 rounded-full bg-blue-600 text-white text-2xl shadow-lg flex items-center justify-start hover:bg-blue-700"
                 >
-                    %
+                    % Filter
                 </button>
 
                 <button
                     onClick={() => navigate("/users/add-user")}
-                    className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-blue-600 text-white text-2xl shadow-lg flex items-center justify-center hover:bg-blue-700"
+                    className="fixed bottom-6 right-6 w-50 h-12 ps-3 rounded-full bg-blue-600 text-white text-2xl shadow-lg flex items-center justify-start hover:bg-blue-700"
                 >
-                    +
+                    + Add User
                 </button>
 
                 <Outlet/>

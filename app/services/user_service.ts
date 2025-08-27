@@ -35,7 +35,7 @@ class UserService {
             }
         }
 
-        return users;
+        return users.sort((a, b) => a.id - b.id);
     }
 
     async createUser(user: User, password: string) {

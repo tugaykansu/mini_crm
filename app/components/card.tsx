@@ -11,7 +11,7 @@ export const UserCard = styled.div`
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   padding: 1rem;
-  background: white;
+  background: rgba(0,0,0,0.7);
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   cursor: pointer;
   transition: transform 0.2s;
