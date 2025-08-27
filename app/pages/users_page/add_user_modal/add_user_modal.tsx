@@ -1,25 +1,32 @@
 import {useState} from "react";
-import {User, UserRole} from "~/models/user";
-import {capitalizeFirst, validateEmail, validateName} from "~/utils/utils";
+import {User, UserRole} from "~/models/user_model";
+import {capitalizeFirst, validateEmail, validateName, validatePassword} from "~/utils/utils";
 import {useNavigate} from "react-router";
 import {useUserStore} from "~/stores/user_store";
 
-export default function AddUser() {
+export default function AddUserModal() {
     const navigate = useNavigate();
 
     const [name, setName] = useState("");
+    const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
     const [role, setRole] = useState(UserRole.USER);
+    const [active, setActive] = useState<boolean>(true);
+
+    const [nameError, setNameError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
+    const [emailError, setEmailError] = useState('');
 
     function validate() {
-        const isNameValid = validateName(name);
-        const isEmailValid = validateEmail(email);
+        const nameError = validateName(name);
+        const passwordError = validatePassword(password);
+        const emailError = validateEmail(email);
 
-        if (!isNameValid) {
-            // todo red borders from bootstrap
-        }
+        setNameError(nameError);
+        setPasswordError(passwordError);
+        setEmailError(emailError);
 
-        return isNameValid && isEmailValid;
+        return !nameError && !passwordError && !emailError;
     }
 
     async function onSubmit(e: any) {
@@ -35,8 +42,9 @@ export default function AddUser() {
             true,
             Math.random() * 6 + 36,
             Math.random() * 18 + 26
-        ));
+        ), password);
         e.preventDefault();
+        navigate("/users");
     }
 
     return (
@@ -54,6 +62,7 @@ export default function AddUser() {
                             }}
                         />
                     </label>
+                    {nameError && <p className="mt-1 text-sm text-red-500">{nameError}</p>}
                     <label>Email:
                         <input
                             id="email"
@@ -64,13 +73,14 @@ export default function AddUser() {
                             }}
                         />
                     </label>
+                    {emailError && <p className="mt-1 text-sm text-red-500">{emailError}</p>}
                     <label>Role:
                         <select
                             id="role"
                             name="role"
                             value={role}
                             onChange={(e) => {
-                                setEmail(e.target.value)
+                                setRole(e.target.value as UserRole);
                             }}
                             className={"w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 border-gray-300"}
                         >
@@ -81,10 +91,29 @@ export default function AddUser() {
                                     value={UserRole.OWNER}>{capitalizeFirst(UserRole.OWNER)}</option>
                         </select>
                     </label>
+
+
+                    <label className="flex items-center space-x-2 cursor-pointer">
+                        <span>Active Status:</span>
+                        <div className="flex items-center space-x-4">
+                            <label className="flex items-center space-x-1 cursor-pointer">
+                                <input
+                                    type="radio"
+                                    name="active"
+                                    checked={active === true}
+                                    onChange={() => setActive(!active)}
+                                    className="w-4 h-4 text-blue-600 focus:ring-blue-500 focus:ring-2"
+                                />
+                                <span className="text-sm">Active</span>
+                            </label>
+                        </div>
+                    </label>
                     <input type="submit"/>
                 </form>
 
 
+                <button onClick={onSubmit}>Submit</button>
+                <span style={{width: 30}}></span>
                 <button onClick={() => navigate("/users")}>Close</button>
             </div>
         </div>

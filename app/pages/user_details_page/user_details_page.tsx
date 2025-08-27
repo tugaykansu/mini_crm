@@ -1,9 +1,10 @@
 import {useParams} from "react-router";
 import {useUserStore} from "~/stores/user_store";
 import {useEffect, useState} from "react";
-import type {User} from "~/models/user";
+import type {User} from "~/models/user_model";
+import User_map from "~/components/user_map";
 
-export default function UserDetails() {
+export default function UserDetailsPage() {
     const params = useParams()
 
     const {loading} = useUserStore();
@@ -43,9 +44,11 @@ export default function UserDetails() {
                 <div>email : {user.email}</div>
                 <div>role : {user.role}</div>
                 <div>creationDate : {user.creationDate.toDateString()} {user.creationDate.toTimeString()}</div>
-                <div>isActive : {user.isActive}</div>
+                <div>isActive : {user.isActive ? 'Active' : 'Deactive'}</div>
                 <div>latitude : {user.latitude}</div>
                 <div>longitude : {user.longitude}</div>
+
+                <User_map/>
             </div>
         </>
     );

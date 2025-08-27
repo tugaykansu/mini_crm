@@ -24,4 +24,24 @@ export class User {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    static parse(jsonString: string): User {
+        const data = JSON.parse(jsonString, (key, value) => {
+            if (key === 'creationDate') {
+                return new Date(value);
+            }
+            return value;
+        });
+
+        return new User(
+            data.id,
+            data.name,
+            data.email,
+            data.role,
+            data.creationDate,
+            data.isActive,
+            data.latitude,
+            data.longitude
+        );
+    }
 }

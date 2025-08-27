@@ -1,6 +1,6 @@
 // This file is NOT for production
 
-import {UserRole} from "~/models/user";
+import {UserRole} from "~/models/user_model";
 
 export function timeout(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms))

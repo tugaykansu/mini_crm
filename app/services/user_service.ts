@@ -1,6 +1,7 @@
-import {User} from "~/models/user";
+import {User} from "~/models/user_model";
 import {faker} from '@faker-js/faker';
 import {emailFromName, isActiveFromId, latitudeAndLongitude, timeout, userRoleFromId} from "~/utils/demo_utils";
+import {simpleHash} from "~/utils/utils";
 
 class UserService {
     async fetchUsers() {
@@ -30,16 +31,17 @@ class UserService {
         const persistentUserRegex = /^user_[0-9]+$/i;
         for (const key in localStorage){
             if( persistentUserRegex.test(key)){
-                users.push(JSON.parse(key))
+                users.push(User.parse(localStorage.getItem(key)!))
             }
         }
 
         return users;
     }
 
-    async createUser(user: User) {
+    async createUser(user: User, password: string) {
+        // do not have user passwords in frontend
         await timeout(1000)
-        localStorage.setItem("user" + user.id, JSON.stringify(user));
+        localStorage.setItem("user_" + user.id, JSON.stringify({...user, password: simpleHash(password)}));
     }
 
     // update, delete(deactivate)
